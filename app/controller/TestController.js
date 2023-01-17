@@ -14,5 +14,16 @@ TestController.urlDemo1 = async (req, res) => {
     res.json({"userId": "172.16.9.148", status: "active"});
 }
 
+TestController.sseTest = async (req, res) => {
+    res.header({
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        "Connection": "keep-alive",
+    });
+    res.write("data: " + (new Date()) + "\n\n");
+    setInterval(() => {
+        res.write("data: " + (new Date()) + "\n\n");
+    }, 1000);
+}
 
 module.exports = TestController;
